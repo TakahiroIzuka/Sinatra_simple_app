@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/css/style.css" />
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
     <title>Top</title>
 </head>
 <body>
 <h1>メモアプリ</h1>
 <ul>
-  <% index = 0 %>
+  <% id = 0 %>
   <% @memos.each do |memo| %>
-    <li><a href=/show/<%= index %>><%= memo["title"] %></a></li>
-    <% index += 1 %>
+    <li><a href=/memos/<%= id %>><%= memo["title"] %></a></li>
+    <% id += 1 %>
   <% end %>
 </ul>
-<input type="button" onclick="location.href='create'" value="追加" />
+<input type="button" onclick="location.href='memos/new'" value="追加">
 </body>
 </html>

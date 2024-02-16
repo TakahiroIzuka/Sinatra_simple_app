@@ -3,77 +3,87 @@
 require 'sinatra'
 require 'json'
 
-get '/' do
-  if File.exist?('memos.json')
+helpers do
+  def read_memos_json
     File.open('memos.json', 'r') do |file|
-      @json = JSON.parse(file.read)
+      JSON.parse(file.read)
     end
-  else
+  end
+
+  def init_memos_json
     File.open('memos.json', 'w') do |file|
       JSON.dump([], file)
     end
   end
 
-  @memos = @json || []
+  def write_memos_json(memos)
+    File.open('memos.json', 'w') do |file|
+      JSON.dump(memos, file)
+    end
+  end
+
+  def get_memo(id)
+    memos = []
+    File.open('memos.json', 'r') do |file|
+      memos = JSON.parse(file.read)
+    end
+    memos[id.to_i]
+  end
+
+  def get_memos
+    memos = []
+    if File.exist?('memos.json')
+      memos = read_memos_json
+    else
+      init_memos_json
+    end
+
+    memos
+  end
+end
+
+get '/' do
+  @memos = get_memos
   erb :index
 end
 
-get '/create' do
+get '/memos/new' do
   erb :create_memo
 end
 
-get '/edit/*' do |index|
-  File.open('memos.json', 'r') do |file|
-    @memos = JSON.parse(file.read)
-  end
-  @memo = @memos[index.to_i]
-  @index = index.to_i
+get '/memos/*/edit' do |id|
+  @memo = get_memo(id)
+  @id = id.to_i
+  p @id
   erb :edit_memo
 end
 
-get '/show/*' do |index|
-  File.open('memos.json', 'r') do |file|
-    @memos = JSON.parse(file.read)
-  end
-  @memo = @memos[index.to_i]
-  @index = index.to_i
+get '/memos/*' do |id|
+  @memo = get_memo(id)
+  @id = id.to_i
   erb :memo_detail
 end
 
 post '/memos' do
-  @memos = []
-  File.open('memos.json', 'r') do |file|
-    memo = JSON.parse(file.read)
-    @memos << memo unless memo.nil?
-  end
+  @memos = read_memos_json
   params[:title] = 'サンプルタイトル' if params[:title].empty?
   params[:body] = 'サンプルの内容' if params[:body].empty?
   @memos.unshift({ title: params[:title], body: params[:body] })
   @memos = @memos.flatten
-  File.open('memos.json', 'w') do |file|
-    JSON.dump(@memos, file)
-  end
+  write_memos_json(@memos)
   redirect to('/')
 end
 
-patch '/memo/*' do |index|
-  File.open('memos.json', 'r') do |file|
-    @memos = JSON.parse(file.read)
-  end
-  @memos[index.to_i] = { title: params[:title], body: params[:body] }
-  File.open('memos.json', 'w') do |file|
-    JSON.dump(@memos, file)
-  end
+patch '/memos/*' do |id|
+  @memos = read_memos_json
+  @memos[id.to_i] = { title: params[:title], body: params[:body] }
+  write_memos_json(@memos)
   redirect to('/')
 end
 
-delete '/memo/*' do |index|
-  File.open('memos.json', 'r') do |file|
-    @memos = JSON.parse(file.read)
-  end
-  @memos.delete_at(index.to_i)
-  File.open('memos.json', 'w') do |file|
-    JSON.dump(@memos, file)
-  end
+delete '/memos/*' do |id|
+  @memos = read_memos_json
+  @memos.delete_at(id.to_i)
+  write_memos_json(@memos)
   redirect to('/')
 end
