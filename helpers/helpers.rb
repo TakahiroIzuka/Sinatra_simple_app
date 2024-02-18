@@ -28,13 +28,7 @@ module MemoHelper
   end
 
   def memos
-    memos = []
-    if File.exist?('memos.json')
-      memos = read_memos_json
-    else
-      init_memos_json
-    end
-
-    memos
+    init_memos_json unless File.exist?('memos.json')
+    read_memos_json
   end
 end
