@@ -10,10 +10,8 @@
 <body>
 <h1>メモアプリ</h1>
 <ul>
-  <% id = 0 %>
   <% @memos.each do |memo| %>
-    <li><a href=/memos/<%= id %>><%= memo["title"] %></a></li>
-    <% id += 1 %>
+    <li><a href=/memos/<%= memo["id"] %>><%= memo["title"] %></a></li>
   <% end %>
 </ul>
 <input type="button" onclick="location.href='memos/new'" value="追加">
