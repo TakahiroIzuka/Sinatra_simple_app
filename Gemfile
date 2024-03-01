@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+gem 'pg'
 gem 'puma'
+gem 'rackup'
 gem 'rerun'
 gem 'sinatra'
 
