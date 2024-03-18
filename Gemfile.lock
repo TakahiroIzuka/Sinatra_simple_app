@@ -1,12 +1,13 @@
 GEM
+  remote: https://rubygems.org/
   specs:
-    actionview (7.1.3)
-      activesupport (= 7.1.3)
+    actionview (7.1.3.2)
+      activesupport (= 7.1.3.2)
       builder (~> 3.1)
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
-    activesupport (7.1.3)
+    activesupport (7.1.3.2)
       base64
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
@@ -17,7 +18,7 @@ GEM
       mutex_m
       tzinfo (~> 2.0)
     ast (2.4.2)
-    base64 (0.1.0)
+    base64 (0.1.1)
     better_html (2.0.2)
       actionview (>= 6.0)
       activesupport (>= 6.0)
@@ -25,12 +26,13 @@ GEM
       erubi (~> 1.4)
       parser (>= 2.4)
       smart_properties
-    bigdecimal (3.0.0)
+    bigdecimal (3.1.1)
     builder (3.2.4)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crass (1.0.6)
-    drb (2.0.5)
+    drb (2.1.0)
+      ruby2_keywords
     erb_lint (0.5.0)
       activesupport
       better_html (>= 2.0.1)
@@ -42,9 +44,9 @@ GEM
     ffi (1.16.3)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
-    json (2.5.1)
+    json (2.6.1)
     language_server-protocol (3.17.0.3)
-    listen (3.8.0)
+    listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.22.0)
@@ -61,15 +63,19 @@ GEM
     parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
+    pg (0.18.4)
     puma (6.4.2)
       nio4r (~> 2.0)
     racc (1.7.3)
-    rack (3.0.9)
+    rack (3.0.9.1)
     rack-protection (4.0.0)
       base64 (>= 0.1.0)
       rack (>= 3.0.0, < 4)
     rack-session (2.0.0)
       rack (>= 3.0.0)
+    rackup (2.1.0)
+      rack (>= 3)
+      webrick (~> 1.8)
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
@@ -85,7 +91,7 @@ GEM
     rerun (0.14.0)
       listen (~> 3.0)
     rexml (3.2.5)
-    rubocop (1.60.2)
+    rubocop (1.61.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -96,8 +102,8 @@ GEM
       rubocop-ast (>= 1.30.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.30.0)
-      parser (>= 3.2.1.0)
+    rubocop-ast (1.31.1)
+      parser (>= 3.3.0.4)
     rubocop-fjord (0.3.0)
       rubocop (>= 1.0)
       rubocop-performance
@@ -117,16 +123,19 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
+    webrick (1.8.1)
 
 PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
   erb_lint
+  pg
   puma
+  rackup
   rerun
   rubocop-fjord
   sinatra
 
 BUNDLED WITH
-   2.2.33
+   2.3.26

@@ -10,8 +10,8 @@
 <h1>メモアプリ</h1>
 <h2><%= @memo["title"] %></h2>
 <p><%= @memo["body"] %></p>
-<input type="button" onclick="location.href='/memos/<%= @id %>/edit'" value="変更">
-<form action="/memos/<%= @id %>" method="post">
+<input type="button" onclick="location.href='/memos/<%= @memo["id"] %>/edit'" value="変更">
+<form action="/memos/<%= @memo["id"] %>" method="post">
   <input type="hidden" name="_method" value="delete">
   <button>削除</button>
 </form>

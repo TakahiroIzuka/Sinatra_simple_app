@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
+source 'https://rubygems.org'
+
+gem 'pg'
 gem 'puma'
+gem 'rackup'
 gem 'rerun'
 gem 'sinatra'
 
